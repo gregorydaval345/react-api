@@ -1,0 +1,26 @@
+
+
+
+Algorithm 
+
+
+Add a toggle to control if currencies not supported in the US should be displayed.
+
+Idea: 
+Hide, Show and Toggle  ... Ultimately create a toggle switch
+
+Show or hide currencies not support 
+in the US
+
+Toggle switch:
+if they are not support in the US, then do not show
+
+
+Otherwise, show them
+
+
+Toggle button must know if the key: "isSupportedInUS" values is "true" or "false"
+before it can make a decision to show or hide when the user selects 
+
+Use should have the option to toggle currencies not support in the US.
+
