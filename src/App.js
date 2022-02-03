@@ -1,4 +1,5 @@
 import React, { useState, useEffect} from 'react';
+import { Switch } from 'antd';
 import axios from 'axios';
 import './App.css';
 import Currency from './components/Currency';
@@ -13,7 +14,7 @@ function App() {
         'https://api.moonpay.com/v3/currencies'
       )
       .then(res => {
-        setCoins(res.data);
+        setCoins(res.data)
         console.log(res.data);
       })
       .catch(error => console.log(error));
@@ -41,6 +42,12 @@ function App() {
             placeholder='Search'
           />
         </form>
+        <div>
+          <h4>Toggles:</h4>
+          <Switch size='large' checkedChildren='Non US' unCheckedChildren='US' />
+          <br />
+          <Switch size='large' checkedChildren='Non Test Mode' unCheckedChildren='Test Mode'/>
+        </div>
       </div>
       {filteredCoins.map(currency => {
         return (
