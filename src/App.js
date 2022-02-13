@@ -33,12 +33,14 @@ function App() {
         filterData = filterData.filter(coin => coin.supportsTestMode)
       }
       if (sortEnabled) {
-        filterData = filterData.sort(coin => function(a, b)
-        {
-         var x = a[coin.name]; 
-         var y = b[coin.name];
-         return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-        }); // RESEARCH : sort list of object by key
+        //filterData = filterData.sort()
+        const ordered = Object.keys(filterData).sort().reduce(
+          (obj, key) => {
+            obj[key] = filterData[key];
+            return obj;
+          },
+          {}
+        );
       }
       setCoins(filterData)
       console.log(res.data);
