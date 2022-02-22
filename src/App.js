@@ -3,7 +3,7 @@ import { Switch } from 'antd';
 import axios from 'axios';
 import './App.css';
 import { Tab, Table } from 'semantic-ui-react';
-import _, { set } from 'lodash'
+import _, { filter, set } from 'lodash'
 import Currency from './components/Currency';
 
 function App() {
@@ -33,14 +33,13 @@ function App() {
         filterData = filterData.filter(coin => coin.supportsTestMode)
       }
       if (sortEnabled) {
-        //filterData = filterData.sort()
-        const ordered = Object.keys(filterData).sort().reduce(
-          (obj, key) => {
-            obj[key] = filterData[key];
-            return obj;
-          },
-          {}
-        );
+        filterData = filterData.sort((a, b) => {
+          let keyA = a.name;
+          let keyB = b.name;
+          if(keyA != keyB){
+            return keyA.localeCompare(keyB);
+          }
+        });
       }
       setCoins(filterData)
       console.log(res.data);
@@ -75,11 +74,11 @@ function App() {
     //fetchCoin()
   }
 
-  // Button Sort functions:
-
+  //Button Sort functions:
   function onSortButtonByName() {
     setSort(!sortEnabled)
   }
+
 
   return (
     <div className='coin-app'>
