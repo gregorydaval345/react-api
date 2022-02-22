@@ -20,6 +20,9 @@ function App() {
   // Button Sort Logic - 'code':
   const [codeSortEnabled, codeSetSort] = useState();
 
+  // Shuffle:
+  const [shuffleEnabled, setShuffle] = useState();
+
 
   function fetchCoin() {
     return axios
@@ -95,6 +98,14 @@ function App() {
   function onSortButtonByCode() {
     codeSetSort(!codeSortEnabled)
   }
+
+  // Shuffling:
+  function onRandomizeArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
   
 
 
@@ -118,6 +129,7 @@ function App() {
         </div>
         <button onClick={onSortButtonByName} >Sort By Name</button>
         <button onClick={onSortButtonByCode}>Sort By Code</button>
+        <button onClick={onRandomizeArray}>Everyday I'm Shuffling &#128517;</button>
       </div>
       {filteredCoins.map(currency => {
         return (
