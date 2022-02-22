@@ -14,8 +14,11 @@ function App() {
   const [usEnabled, setUsEnabled] = useState(false);
   const [testModeEnabled, setTestModeEnabled] = useState(false);
 
-  // Button Sort Logic:
+  // Button Sort Logic - 'name':
   const [sortEnabled, setSort] = useState();
+
+  // Button Sort Logic - 'code':
+  const [codeSortEnabled, codeSetSort] = useState();
 
 
   function fetchCoin() {
@@ -41,6 +44,15 @@ function App() {
           }
         });
       }
+      if (codeSortEnabled) {
+        filterData = filterData.sort((a, b) => {
+          let keyA = a.code;
+          let keyB = b.code;
+          if(keyA != keyB){
+            return keyA.localeCompare(keyB);
+          }
+        });
+      }
       setCoins(filterData)
       console.log(res.data);
     })
@@ -49,7 +61,7 @@ function App() {
 
   useEffect(() => {
     fetchCoin()
-  }, [usEnabled, testModeEnabled, sortEnabled]); //re-run// re-fetch
+  }, [usEnabled, testModeEnabled, sortEnabled, codeSortEnabled]); //re-run// re-fetch
 
   const handleChange = e => {
     setSearch(e.target.value);
@@ -74,10 +86,16 @@ function App() {
     //fetchCoin()
   }
 
-  //Button Sort functions:
+  //Button Sort functions: by name
   function onSortButtonByName() {
     setSort(!sortEnabled)
   }
+
+  // Button Sorty function: by code
+  function onSortButtonByCode() {
+    codeSetSort(!codeSortEnabled)
+  }
+  
 
 
   return (
@@ -99,6 +117,7 @@ function App() {
           <Switch onClick={OnTestModeClickEvent} size='large' checkedChildren='Non Test Mode' unCheckedChildren='Test Mode'/>
         </div>
         <button onClick={onSortButtonByName} >Sort By Name</button>
+        <button onClick={onSortButtonByCode}>Sort By Code</button>
       </div>
       {filteredCoins.map(currency => {
         return (
