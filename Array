@@ -1,0 +1,4 @@
+An array is a named list of data  items that all have the same data type. Each data item is an element of the array. 
+
+
+var numArray = [1,2,3];
